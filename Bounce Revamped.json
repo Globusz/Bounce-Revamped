@@ -1,7 +1,7 @@
 {
   "firstLayout": "",
   "gdVersion": {
-    "build": 251,
+    "build": 252,
     "major": 5,
     "minor": 6,
     "revision": 0
@@ -85,6 +85,7 @@
     ],
     "categories": [],
     "playableDevices": [
+      "mobile",
       "mobile"
     ],
     "extensionProperties": [],
@@ -26696,7 +26697,7 @@
           "children": [
             {
               "type": "number",
-              "value": 30
+              "value": 210
             },
             {
               "type": "number",
@@ -26761,22 +26762,6 @@
           "x": 200,
           "y": -140,
           "zOrder": 3,
-          "numberProperties": [],
-          "stringProperties": [],
-          "initialVariables": []
-        },
-        {
-          "angle": 0,
-          "customSize": false,
-          "height": 0,
-          "keepRatio": true,
-          "layer": "",
-          "name": "lapda",
-          "persistentUuid": "300744e7-9906-4059-b440-e35369f168fd",
-          "width": 0,
-          "x": 210,
-          "y": 60,
-          "zOrder": 2,
           "numberProperties": [],
           "stringProperties": [],
           "initialVariables": []
@@ -37709,7 +37694,20 @@
               "name": "FlashDuration"
             }
           ],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "HalfPeriodTime"
+              },
+              {
+                "propertyName": "IsFlashing"
+              },
+              {
+                "propertyName": "FlashDuration"
+              }
+            ]
+          }
         },
         {
           "description": "Make an object flash a color tint for a period of time.",
@@ -38283,7 +38281,23 @@
               "name": "TintColor"
             }
           ],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "HalfPeriodTime"
+              },
+              {
+                "propertyName": "IsFlashing"
+              },
+              {
+                "propertyName": "FlashDuration"
+              },
+              {
+                "propertyName": "TintColor"
+              }
+            ]
+          }
         },
         {
           "description": "Flash opacity smoothly (fade) in a repeating loop.",
@@ -38937,7 +38951,32 @@
               "name": "StartingOpacity"
             }
           ],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Opacity"
+              },
+              {
+                "propertyName": "TweenBehavior"
+              },
+              {
+                "propertyName": "HalfPeriodTime"
+              },
+              {
+                "propertyName": "IsFlashing"
+              },
+              {
+                "propertyName": "FlashDuration"
+              },
+              {
+                "propertyName": "TargetOpacity"
+              },
+              {
+                "propertyName": "StartingOpacity"
+              }
+            ]
+          }
         },
         {
           "description": "Make the object flash an effect for a period of time.",
@@ -39785,7 +39824,26 @@
               "name": "EffectName"
             }
           ],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Effect"
+              },
+              {
+                "propertyName": "HalfPeriodTime"
+              },
+              {
+                "propertyName": "IsFlashing"
+              },
+              {
+                "propertyName": "FlashDuration"
+              },
+              {
+                "propertyName": "EffectName"
+              }
+            ]
+          }
         }
       ],
       "eventsBasedObjects": []
@@ -43979,7 +44037,9 @@
             }
           ],
           "propertyDescriptors": [],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          }
         }
       ],
       "eventsBasedObjects": []
@@ -44112,7 +44172,9 @@
             }
           ],
           "propertyDescriptors": [],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          }
         }
       ],
       "eventsBasedObjects": []
@@ -45125,7 +45187,26 @@
               "name": "TypedText"
             }
           ],
-          "sharedPropertyDescriptors": []
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Text"
+              },
+              {
+                "propertyName": "Interval"
+              },
+              {
+                "propertyName": "CharacterJustAdded"
+              },
+              {
+                "propertyName": "FullText"
+              },
+              {
+                "propertyName": "TypedText"
+              }
+            ]
+          }
         }
       ],
       "eventsBasedObjects": []
