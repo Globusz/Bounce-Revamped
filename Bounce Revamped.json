@@ -569,6 +569,20 @@
           "name": "gravitációSzorzó",
           "type": "number",
           "value": 1
+        },
+        {
+          "name": "spawnpoint",
+          "type": "array",
+          "children": [
+            {
+              "type": "number",
+              "value": 0
+            },
+            {
+              "type": "number",
+              "value": 0
+            }
+          ]
         }
       ],
       "effects": [],
@@ -1468,8 +1482,26 @@
       "type": "TiledSpriteObject::TiledSprite",
       "width": 170,
       "variables": [],
-      "effects": [],
-      "behaviors": []
+      "effects": [
+        {
+          "effectType": "MotionBlur",
+          "name": "Effect",
+          "doubleParameters": {
+            "kernelSize": 7,
+            "offset": 0,
+            "velocityX": 250,
+            "velocityY": 0
+          },
+          "stringParameters": {},
+          "booleanParameters": {}
+        }
+      ],
+      "behaviors": [
+        {
+          "name": "Tween",
+          "type": "Tween::TweenBehavior"
+        }
+      ]
     },
     {
       "assetStoreId": "",
@@ -2774,7 +2806,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -3745,13 +3777,16 @@
         "gridType": "rectangular",
         "gridWidth": 32,
         "gridHeight": 32,
+        "gridDepth": 32,
         "gridOffsetX": 0,
         "gridOffsetY": 0,
+        "gridOffsetZ": 0,
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 4.117647058823529,
-        "windowMask": false
+        "zoomFactor": 2.6755271972269083,
+        "windowMask": false,
+        "selectedLayer": ""
       },
       "objectsGroups": [],
       "variables": [
@@ -3766,15 +3801,32 @@
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 130,
+          "height": 132,
           "keepRatio": true,
           "layer": "",
-          "name": "szpless",
-          "persistentUuid": "bbfeef80-1d9b-4ff3-add7-23b07ae149ab",
+          "name": "háttér",
+          "persistentUuid": "f77974fd-dd22-420f-9aba-145e3ebc3a2e",
           "width": 170,
           "x": 0,
           "y": 0,
           "zOrder": 1,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "depth": 1,
+          "height": 10,
+          "keepRatio": true,
+          "layer": "",
+          "name": "floor",
+          "persistentUuid": "7ef4c709-643e-4c0a-816b-c2a7392b7916",
+          "width": 172,
+          "x": 0,
+          "y": 120,
+          "zOrder": 2,
           "numberProperties": [],
           "stringProperties": [],
           "initialVariables": []
@@ -3858,6 +3910,35 @@
               ]
             }
           ]
+        },
+        {
+          "assetStoreId": "",
+          "height": 10,
+          "name": "floor",
+          "texture": "cuccok/graf/kocka.png",
+          "type": "TiledSpriteObject::TiledSprite",
+          "width": 32,
+          "variables": [],
+          "effects": [
+            {
+              "effectType": "MotionBlur",
+              "name": "Effect",
+              "doubleParameters": {
+                "kernelSize": 7,
+                "offset": 0,
+                "velocityX": 250,
+                "velocityY": 0
+              },
+              "stringParameters": {},
+              "booleanParameters": {}
+            }
+          ],
+          "behaviors": [
+            {
+              "name": "Tween",
+              "type": "Tween::TweenBehavior"
+            }
+          ]
         }
       ],
       "objectsFolderStructure": {
@@ -3865,6 +3946,9 @@
         "children": [
           {
             "objectName": "szpless"
+          },
+          {
+            "objectName": "floor"
           }
         ]
       },
@@ -3881,7 +3965,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -3891,7 +3975,7 @@
           "actions": [
             {
               "type": {
-                "value": "PlaySoundCanal"
+                "value": "PlaySoundOnChannel"
               },
               "parameters": [
                 "",
@@ -3904,13 +3988,16 @@
             },
             {
               "type": {
-                "value": "OpacityCapability::OpacityBehavior::SetValue"
+                "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
               },
               "parameters": [
-                "szpless",
-                "Opacity",
-                "=",
-                "0"
+                "háttér",
+                "Tween",
+                "\"áttűnés1\"",
+                "255",
+                "\"linear\"",
+                "0.7",
+                ""
               ]
             },
             {
@@ -3918,7 +4005,7 @@
                 "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
               },
               "parameters": [
-                "szpless",
+                "floor",
                 "Tween",
                 "\"áttűnés1\"",
                 "255",
@@ -3932,7 +4019,24 @@
                 "value": "Tween::TweenBehavior::AddNumberEffectPropertyTween"
               },
               "parameters": [
-                "szpless",
+                "háttér",
+                "Tween",
+                "Effect",
+                "\"áttűnés2\"",
+                "0",
+                "\"Effect\"",
+                "\"velocityX\"",
+                "\"linear\"",
+                "1",
+                ""
+              ]
+            },
+            {
+              "type": {
+                "value": "Tween::TweenBehavior::AddNumberEffectPropertyTween"
+              },
+              "parameters": [
+                "floor",
                 "Tween",
                 "Effect",
                 "\"áttűnés2\"",
@@ -3960,7 +4064,17 @@
                     "value": "Tween::HasFinished"
                   },
                   "parameters": [
-                    "szpless",
+                    "háttér",
+                    "Tween",
+                    "\"áttűnés2\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::HasFinished"
+                  },
+                  "parameters": [
+                    "háttér",
                     "Tween",
                     "\"áttűnés1\""
                   ]
@@ -3970,7 +4084,17 @@
                     "value": "Tween::HasFinished"
                   },
                   "parameters": [
-                    "szpless",
+                    "floor",
+                    "Tween",
+                    "\"áttűnés1\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::HasFinished"
+                  },
+                  "parameters": [
+                    "floor",
                     "Tween",
                     "\"áttűnés2\""
                   ]
@@ -3999,7 +4123,21 @@
                 "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
               },
               "parameters": [
-                "szpless",
+                "háttér",
+                "Tween",
+                "\"áttűnés1\"",
+                "0",
+                "\"linear\"",
+                "0.7",
+                ""
+              ]
+            },
+            {
+              "type": {
+                "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
+              },
+              "parameters": [
+                "floor",
                 "Tween",
                 "\"áttűnés1\"",
                 "0",
@@ -4013,7 +4151,7 @@
                 "value": "Tween::TweenBehavior::AddNumberEffectPropertyTween"
               },
               "parameters": [
-                "szpless",
+                "háttér",
                 "Tween",
                 "Effect",
                 "\"áttűnés2\"",
@@ -4027,7 +4165,24 @@
             },
             {
               "type": {
-                "value": "PlaySoundCanal"
+                "value": "Tween::TweenBehavior::AddNumberEffectPropertyTween"
+              },
+              "parameters": [
+                "floor",
+                "Tween",
+                "Effect",
+                "\"áttűnés2\"",
+                "250",
+                "\"Effect\"",
+                "\"velocityX\"",
+                "\"linear\"",
+                "1",
+                ""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaySoundOnChannel"
               },
               "parameters": [
                 "",
@@ -8364,13 +8519,16 @@
         "gridType": "rectangular",
         "gridWidth": 32,
         "gridHeight": 32,
+        "gridDepth": 32,
         "gridOffsetX": 0,
         "gridOffsetY": 0,
+        "gridOffsetZ": 0,
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
         "zoomFactor": 2.675527197226905,
-        "windowMask": false
+        "windowMask": false,
+        "selectedLayer": ""
       },
       "objectsGroups": [],
       "variables": [
@@ -9413,7 +9571,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -11813,7 +11971,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -14021,7 +14179,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -15157,7 +15315,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -17464,7 +17622,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -19070,7 +19228,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -21835,7 +21993,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -22081,13 +22239,16 @@
         "gridType": "rectangular",
         "gridWidth": 10,
         "gridHeight": 10,
+        "gridDepth": 32,
         "gridOffsetX": 0,
         "gridOffsetY": 0,
+        "gridOffsetZ": 0,
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": true,
-        "zoomFactor": 0.989276385608269,
-        "windowMask": false
+        "zoomFactor": 3.6060927130618836,
+        "windowMask": false,
+        "selectedLayer": ""
       },
       "objectsGroups": [],
       "variables": [
@@ -22246,7 +22407,7 @@
             "rowCount": 1,
             "columnCount": 16,
             "tileSize": 10,
-            "tilesWithHitBox": "1,2,3,4,5,6,13,0,12"
+            "tilesWithHitBox": "0,1,2,3,4,6,5,13,12"
           }
         }
       ],
@@ -22264,7 +22425,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -23579,7 +23740,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -24031,7 +24192,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -26834,7 +26995,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -27363,7 +27524,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -27836,7 +27997,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -28579,7 +28740,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -28625,7 +28786,7 @@
             },
             {
               "type": {
-                "value": "CacheSouris"
+                "value": "HideCursor"
               },
               "parameters": [
                 ""
@@ -28652,7 +28813,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -28660,7 +28821,7 @@
             },
             {
               "type": {
-                "value": "AjoutObjConcern"
+                "value": "PickAllInstances"
               },
               "parameters": [
                 "",
@@ -28679,7 +28840,7 @@
             },
             {
               "type": {
-                "value": "Cache"
+                "value": "Hide"
               },
               "parameters": [
                 "drónstop"
@@ -28718,7 +28879,7 @@
             },
             {
               "type": {
-                "value": "Cache"
+                "value": "Hide"
               },
               "parameters": [
                 "teleportsugár"
@@ -28726,7 +28887,7 @@
             },
             {
               "type": {
-                "value": "Cache"
+                "value": "Hide"
               },
               "parameters": [
                 "konzol"
@@ -28734,7 +28895,7 @@
             },
             {
               "type": {
-                "value": "Cache"
+                "value": "Hide"
               },
               "parameters": [
                 "háttér"
@@ -28893,7 +29054,7 @@
             },
             {
               "type": {
-                "value": "Montre"
+                "value": "Show"
               },
               "parameters": [
                 "teleportsugár",
@@ -28902,7 +29063,7 @@
             },
             {
               "type": {
-                "value": "PlaySoundCanal"
+                "value": "PlaySoundOnChannel"
               },
               "parameters": [
                 "",
@@ -28935,138 +29096,223 @@
             },
             {
               "type": {
-                "value": "Cache"
+                "value": "Hide"
               },
               "parameters": [
                 "teleportsugár"
               ]
-            },
-            {
-              "type": {
-                "value": "SetNumberVariable"
-              },
-              "parameters": [
-                "lapdaSpawnpoint[0]",
-                "=",
-                "eredetiSpawn[0]"
-              ]
-            },
-            {
-              "type": {
-                "value": "SetNumberVariable"
-              },
-              "parameters": [
-                "lapdaSpawnpoint[1]",
-                "=",
-                "eredetiSpawn[1]"
-              ]
-            },
-            {
-              "type": {
-                "value": "Create"
-              },
-              "parameters": [
-                "lapda",
-                "lapda",
-                "lapdaSpawnpoint[0]",
-                "lapdaSpawnpoint[1]",
-                ""
-              ]
-            },
-            {
-              "type": {
-                "value": "SetNumberObjectVariable"
-              },
-              "parameters": [
-                "lapda",
-                "mennyiGyűrűMaradt",
-                "=",
-                "gyűrűSzám"
-              ]
-            },
-            {
-              "type": {
-                "value": "Tween::TweenCameraPosition2"
-              },
-              "parameters": [
-                "",
-                "\"UImozog1\"",
-                "170/2",
-                "130/2",
-                "\"UI\"",
-                "\"linear\"",
-                "0.6"
-              ]
-            },
-            {
-              "type": {
-                "value": "Wait"
-              },
-              "parameters": [
-                "2"
-              ]
-            },
-            {
-              "type": {
-                "value": "Tween::TweenCameraPosition2"
-              },
-              "parameters": [
-                "",
-                "\"UImozog2\"",
-                "170/2+170",
-                "130/2",
-                "\"UI\"",
-                "\"linear\"",
-                "0.2"
-              ]
-            },
-            {
-              "type": {
-                "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
-              },
-              "parameters": [
-                "sötétítő",
-                "Tween",
-                "\"kivilágosodik\"",
-                "0",
-                "\"linear\"",
-                "0.8",
-                ""
-              ]
-            },
-            {
-              "type": {
-                "value": "EnableLayerEffect"
-              },
-              "parameters": [
-                "",
-                "",
-                "\"Effect\"",
-                ""
-              ]
-            },
-            {
-              "type": {
-                "value": "SetBooleanObjectVariable"
-              },
-              "parameters": [
-                "lapda",
-                "mozoghat",
-                "True",
-                ""
-              ]
-            },
-            {
-              "type": {
-                "value": "ResetTimer"
-              },
-              "parameters": [
-                "",
-                "\"időmérő\""
-              ]
             }
           ],
           "events": [
+            {
+              "colorB": 0,
+              "colorG": 0,
+              "colorR": 0,
+              "creationTime": 0,
+              "folded": true,
+              "name": "csekkpolyint ellenőrzése",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "ebbenAjelenetbenElőszörVanItt",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "lapdaHalálSzám",
+                        "+",
+                        "1"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Create"
+                      },
+                      "parameters": [
+                        "lapda",
+                        "lapda",
+                        "lapdaSpawnpoint[0]",
+                        "lapdaSpawnpoint[1]",
+                        ""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "ebbenAjelenetbenElőszörVanItt",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "pályaElejénHányÉletVolt",
+                        "=",
+                        "életek"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "lapdaSpawnpoint[0]",
+                        "=",
+                        "eredetiSpawn[0]"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "lapdaSpawnpoint[1]",
+                        "=",
+                        "eredetiSpawn[1]"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Create"
+                      },
+                      "parameters": [
+                        "lapda",
+                        "lapda",
+                        "lapdaSpawnpoint[0]",
+                        "lapdaSpawnpoint[1]",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberObjectVariable"
+                  },
+                  "parameters": [
+                    "lapda",
+                    "mennyiGyűrűMaradt",
+                    "=",
+                    "gyűrűSzám"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenCameraPosition2"
+                  },
+                  "parameters": [
+                    "",
+                    "\"UImozog1\"",
+                    "170/2",
+                    "130/2",
+                    "\"UI\"",
+                    "\"linear\"",
+                    "0.6"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Wait"
+                  },
+                  "parameters": [
+                    "2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenCameraPosition2"
+                  },
+                  "parameters": [
+                    "",
+                    "\"UImozog2\"",
+                    "170/2+170",
+                    "130/2",
+                    "\"UI\"",
+                    "\"linear\"",
+                    "0.2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
+                  },
+                  "parameters": [
+                    "sötétítő",
+                    "Tween",
+                    "\"kivilágosodik\"",
+                    "0",
+                    "\"linear\"",
+                    "0.8",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "EnableLayerEffect"
+                  },
+                  "parameters": [
+                    "",
+                    "",
+                    "\"Effect\"",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetBooleanObjectVariable"
+                  },
+                  "parameters": [
+                    "lapda",
+                    "mozoghat",
+                    "True",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ResetTimer"
+                  },
+                  "parameters": [
+                    "",
+                    "\"időmérő\""
+                  ]
+                }
+              ]
+            },
             {
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
@@ -29084,65 +29330,11 @@
               "actions": [
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "háttér",
                     ""
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "BooleanVariable"
-                  },
-                  "parameters": [
-                    "ebbenAjelenetbenElőszörVanItt",
-                    "False",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "SetNumberVariable"
-                  },
-                  "parameters": [
-                    "lapdaHalálSzám",
-                    "+",
-                    "1"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "BooleanVariable"
-                  },
-                  "parameters": [
-                    "ebbenAjelenetbenElőszörVanItt",
-                    "True",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "SetNumberVariable"
-                  },
-                  "parameters": [
-                    "pályaElejénHányÉletVolt",
-                    "=",
-                    "életek"
                   ]
                 }
               ]
@@ -29164,7 +29356,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "PlayMusicCanal"
+                    "value": "PlayMusicOnChannel"
                   },
                   "parameters": [
                     "",
@@ -29194,7 +29386,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "PlayMusicCanal"
+                    "value": "PlayMusicOnChannel"
                   },
                   "parameters": [
                     "",
@@ -29223,7 +29415,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "ModGlobalVolume"
+                    "value": "SetGlobalVolume"
                   },
                   "parameters": [
                     "",
@@ -29498,7 +29690,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "CentreCamera"
+                    "value": "CenterCameraOnObject"
                   },
                   "parameters": [
                     "",
@@ -29510,7 +29702,7 @@
                 },
                 {
                   "type": {
-                    "value": "CentreCamera"
+                    "value": "CenterCameraOnObject"
                   },
                   "parameters": [
                     "",
@@ -30117,7 +30309,7 @@
                       "actions": [
                         {
                           "type": {
-                            "value": "PlaySoundCanal"
+                            "value": "PlaySoundOnChannel"
                           },
                           "parameters": [
                             "",
@@ -30412,22 +30604,20 @@
                       "actions": [
                         {
                           "type": {
-                            "value": "SetNumberObjectVariable"
+                            "value": "SetNumberVariable"
                           },
                           "parameters": [
-                            "lapda",
-                            "spawnpoint[0]",
+                            "lapdaSpawnpoint[0]",
                             "=",
                             "lapda.X()"
                           ]
                         },
                         {
                           "type": {
-                            "value": "SetNumberObjectVariable"
+                            "value": "SetNumberVariable"
                           },
                           "parameters": [
-                            "lapda",
-                            "spawnpoint[1]",
+                            "lapdaSpawnpoint[1]",
                             "=",
                             "lapda.Y()"
                           ]
@@ -30728,7 +30918,7 @@
                           "conditions": [
                             {
                               "type": {
-                                "value": "AjoutObjConcern"
+                                "value": "PickAllInstances"
                               },
                               "parameters": [
                                 "",
@@ -30814,7 +31004,7 @@
                           "conditions": [
                             {
                               "type": {
-                                "value": "AjoutObjConcern"
+                                "value": "PickAllInstances"
                               },
                               "parameters": [
                                 "",
@@ -31049,7 +31239,7 @@
                           "conditions": [
                             {
                               "type": {
-                                "value": "AjoutObjConcern"
+                                "value": "PickAllInstances"
                               },
                               "parameters": [
                                 "",
@@ -31153,7 +31343,7 @@
                           "conditions": [
                             {
                               "type": {
-                                "value": "AjoutObjConcern"
+                                "value": "PickAllInstances"
                               },
                               "parameters": [
                                 "",
@@ -31619,6 +31809,7 @@
           "colorG": 0,
           "colorR": 0,
           "creationTime": 0,
+          "folded": true,
           "name": "drón mozgása",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -31645,6 +31836,7 @@
               "colorG": 0,
               "colorR": 0,
               "creationTime": 0,
+              "folded": true,
               "name": "megfordulás",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -31899,7 +32091,7 @@
                         },
                         {
                           "type": {
-                            "value": "StopMusicCanal"
+                            "value": "StopMusicChannel"
                           },
                           "parameters": [
                             "",
@@ -31908,7 +32100,7 @@
                         },
                         {
                           "type": {
-                            "value": "MettreXY"
+                            "value": "SetXY"
                           },
                           "parameters": [
                             "teleportsugár",
@@ -31920,7 +32112,7 @@
                         },
                         {
                           "type": {
-                            "value": "PlaySoundCanal"
+                            "value": "PlaySoundOnChannel"
                           },
                           "parameters": [
                             "",
@@ -31945,7 +32137,7 @@
                         },
                         {
                           "type": {
-                            "value": "Montre"
+                            "value": "Show"
                           },
                           "parameters": [
                             "teleportsugár",
@@ -31954,7 +32146,7 @@
                         },
                         {
                           "type": {
-                            "value": "Cache"
+                            "value": "Hide"
                           },
                           "parameters": [
                             "lapda"
@@ -31989,7 +32181,7 @@
                         },
                         {
                           "type": {
-                            "value": "PlaySoundCanal"
+                            "value": "PlaySoundOnChannel"
                           },
                           "parameters": [
                             "",
@@ -32181,7 +32373,7 @@
             },
             {
               "type": {
-                "value": "Montre"
+                "value": "Show"
               },
               "parameters": [
                 "konzol",
@@ -32205,7 +32397,7 @@
           "actions": [
             {
               "type": {
-                "value": "Cache"
+                "value": "Hide"
               },
               "parameters": [
                 "konzol"
@@ -33080,7 +33272,7 @@
           "actions": [
             {
               "type": {
-                "value": "MettreY"
+                "value": "SetY"
               },
               "parameters": [
                 "pályaVégeKijelölés",
@@ -33157,7 +33349,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeHalálSzám"
@@ -33165,7 +33357,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeMostaniIdő"
@@ -33173,7 +33365,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeLegjobbIdő"
@@ -33181,7 +33373,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeTova"
@@ -33189,7 +33381,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeÚjra"
@@ -33197,7 +33389,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeKilép"
@@ -33205,7 +33397,7 @@
                     },
                     {
                       "type": {
-                        "value": "Cache"
+                        "value": "Hide"
                       },
                       "parameters": [
                         "pályaVégeKijelölés"
@@ -33297,7 +33489,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeLegjobbIdő",
@@ -33339,7 +33531,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeMostaniIdő",
@@ -33381,7 +33573,7 @@
               "actions": [
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeHalálSzám",
@@ -33431,7 +33623,7 @@
                 },
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeÚjra",
@@ -33471,7 +33663,7 @@
                 },
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeTova",
@@ -33511,7 +33703,7 @@
                 },
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeKilép",
@@ -33551,7 +33743,7 @@
                 },
                 {
                   "type": {
-                    "value": "Montre"
+                    "value": "Show"
                   },
                   "parameters": [
                     "pályaVégeKijelölés",
@@ -34267,7 +34459,7 @@
                 },
                 {
                   "type": {
-                    "value": "PlaySoundCanal"
+                    "value": "PlaySoundOnChannel"
                   },
                   "parameters": [
                     "",
@@ -34324,7 +34516,7 @@
                 },
                 {
                   "type": {
-                    "value": "PlaySoundCanal"
+                    "value": "PlaySoundOnChannel"
                   },
                   "parameters": [
                     "",
@@ -34653,7 +34845,7 @@
           "conditions": [
             {
               "type": {
-                "value": "DepartScene"
+                "value": "SceneJustBegins"
               },
               "parameters": [
                 ""
@@ -34675,7 +34867,7 @@
             },
             {
               "type": {
-                "value": "PlaySoundCanal"
+                "value": "PlaySoundOnChannel"
               },
               "parameters": [
                 "",
